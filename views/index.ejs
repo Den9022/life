@@ -1,0 +1,60 @@
+<html>
+
+<head>
+    <title> Game of Life </title>
+    <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet">
+    <link href="/styles.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h2> Game of Life </h2>
+        <form action="/fileupload" method="post" enctype="multipart/form-data">
+            <input type="file" name="lif"><br>
+            <input type="submit">
+        </form>
+        <div id="buttons">
+            <button id="prev" type="submit" onclick="prev()">Prev</button>
+            <button id="next" type="submit" onclick="next()">Next</button>
+            <button id="auto" type="submit" onclick="auto()">Auto</button>
+
+        </div>
+        <div id="output">
+
+
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+
+    function next() {
+
+        $.ajax({
+            url: "/next",
+            context: document.body
+        }).done(function (data) {
+            $('#output').html(data);
+        });
+
+    }
+
+    function prev() {
+
+        $.ajax({
+            url: "/prev",
+            context: document.body
+        }).done(function (data) {
+            $('#output').html(data);
+        });
+
+    }
+    function auto() {
+        setInterval(function () {
+            next();
+        }, 1000);
+    }
+
+</script>
